@@ -13,7 +13,7 @@
 
             <?php if ($userCanRespond && !$userAlreadyResponded): ?>
                 <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Attend"), $this->createContainerUrl('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED, 'id' => $calendarEntry->id)), array('class' => 'btn btn-success')); ?>
-                <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Maybe"), $this->createContainerUrl('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_MAYBE, 'id' => $calendarEntry->id)), array('class' => 'btn btn-default')); ?>
+                <!-- <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Maybe"), $this->createContainerUrl('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_MAYBE, 'id' => $calendarEntry->id)), array('class' => 'btn btn-default')); ?> -->
                 <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Decline"), $this->createContainerUrl('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED, 'id' => $calendarEntry->id)), array('class' => 'btn btn-default')); ?>
             <?php endif; ?>
 
@@ -21,7 +21,7 @@
                 <?php
                 $participationModes = array();
                 $participationModes[CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED] = Yii::t('CalendarModule.views_entry_view', "I´m attending");
-                $participationModes[CalendarEntryParticipant::PARTICIPATION_STATE_MAYBE] = Yii::t('CalendarModule.views_entry_view', "I´m maybe attending");
+                // $participationModes[CalendarEntryParticipant::PARTICIPATION_STATE_MAYBE] = Yii::t('CalendarModule.views_entry_view', "I´m maybe attending");
                 $participationModes[CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED] = Yii::t('CalendarModule.views_entry_view', "I´m not attending");
                 ?>
 
@@ -49,17 +49,17 @@
                     <?php echo HHtml::link(Yii::t('CalendarModule.views_entry_view', 'Edit this event'), '#', array('class' => 'btn btn-primary btn-sm', 'onclick' => 'openEditModal(' . $calendarEntry->id . ')')); ?>
                 <?php endif; ?>
             </div>
-            <br />            
+            <br />
         </div>
 
         <?php $this->widget('application.modules.calendar.widgets.CalendarEntryDateWidget', array('calendarEntry'=>$calendarEntry)); ?>
-        
+
         <br /><br />
 
         <?php echo Yii::t('CalendarModule.views_entry_view', 'Created by:'); ?> <strong><?php echo HHtml::link($calendarEntry->content->user->displayName, $calendarEntry->content->user->getUrl()); ?></strong><br />
 
         <?php $this->widget('application.modules.calendar.widgets.CalendarEntryParticipantsWidget', array('calendarEntry'=>$calendarEntry)); ?>
-        
+
         <br />
 
         <?php $this->beginWidget('CMarkdown'); ?><?php echo nl2br(CHtml::encode($calendarEntry->description)); ?><?php $this->endWidget(); ?>
@@ -85,4 +85,4 @@
             remote: editUrl
         });
     }
-</script>    
+</script>

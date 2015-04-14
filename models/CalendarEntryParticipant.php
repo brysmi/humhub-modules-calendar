@@ -14,7 +14,7 @@ class CalendarEntryParticipant extends HActiveRecord
 
     const PARTICIPATION_STATE_INVITED = 0;
     const PARTICIPATION_STATE_DECLINED = 1;
-    const PARTICIPATION_STATE_MAYBE = 2;
+    // const PARTICIPATION_STATE_MAYBE = 2;
     const PARTICIPATION_STATE_ACCEPTED = 3;
 
     /**
@@ -98,23 +98,23 @@ class CalendarEntryParticipant extends HActiveRecord
     public function beforeDelete()
     {
         return parent::beforeDelete();
-        
+
         //ToDo: Delete activities?
     }
-    
+
     public function afterSave()
     {
         # Handled by Notification now
         $activity = Activity::CreateForContent($this->calendar_entry);
-        
+
         if ($this->participation_state == self::PARTICIPATION_STATE_ACCEPTED) {
             $activity->type = "EntryResponseAttend";
-        } elseif ($this->participation_state == self::PARTICIPATION_STATE_MAYBE) {
-            $activity->type = "EntryResponseMaybe";
+        // } elseif ($this->participation_state == self::PARTICIPATION_STATE_MAYBE) {
+        //     $activity->type = "EntryResponseMaybe";
         } elseif ($this->participation_state == self::PARTICIPATION_STATE_DECLINED) {
             $activity->type = "EntryResponseDeclined";
         }
-        
+
         $activity->module = "calendar";
         $activity->content->user_id = $this->user_id;
         $activity->save();
