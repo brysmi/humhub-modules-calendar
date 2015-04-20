@@ -43,6 +43,10 @@
 
 
         <strong>Event: <?php echo CHtml::encode($calendarEntry->title); ?></strong><br />
+        <?php if ($calendarEntry->location != ""): ?>
+            <!-- TODO: location widget -->
+            <?php echo CHtml::encode($calendarEntry->location); ?><br />
+        <?php endif; ?>
         <?php $this->widget('application.modules.calendar.widgets.CalendarEntryDateWidget', array('calendarEntry' => $calendarEntry)); ?><br />
         <br />
         <?php $this->widget('application.modules.calendar.widgets.CalendarEntryParticipantsWidget', array('calendarEntry' => $calendarEntry)); ?><br />

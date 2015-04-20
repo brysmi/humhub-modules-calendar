@@ -107,9 +107,9 @@ class CalendarEntry extends HActiveRecordContent
             array('end_time', 'validateEndTime'),
             array('all_day, is_public', 'in', 'range' => array(0, 1), 'allowEmpty' => true),
             array('all_day, recur, recur_type, recur_interval', 'numerical', 'integerOnly' => true),
-            array('title', 'length', 'max' => 255),
+            array('title, location, geo, source_uri', 'length', 'max' => 255),
             array('participation_mode', 'in', 'range' => array(self::PARTICIPATION_MODE_ALL, self::PARTICIPATION_MODE_INVITE, self::PARTICIPATION_MODE_NONE), 'allowEmpty' => true),
-            array('recur_end, description', 'safe'),
+            array('recur_end, description, location, geo, source_uri', 'safe'),
         );
     }
 

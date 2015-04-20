@@ -56,11 +56,14 @@
 
         <br /><br />
 
-        <?php echo Yii::t('CalendarModule.views_entry_view', 'Created by:'); ?> <strong><?php echo HHtml::link($calendarEntry->content->user->displayName, $calendarEntry->content->user->getUrl()); ?></strong><br />
+        <?php echo Yii::t('CalendarModule.views_entry_view', 'Created by:'); ?> <strong><?php echo HHtml::link($calendarEntry->content->user->displayName, $calendarEntry->content->user->getUrl()); ?></strong>
+        <br />
 
         <?php $this->widget('application.modules.calendar.widgets.CalendarEntryParticipantsWidget', array('calendarEntry'=>$calendarEntry)); ?>
 
-        <br />
+<!-- TODO: Location map view widget -->
+        <?php echo Yii::t('CalendarModule.views_entry_view', 'Location:'); ?> <strong><?php echo CHtml::encode($calendarEntry->location); ?></strong>
+        <br /><br />
 
         <?php $this->beginWidget('CMarkdown'); ?><?php echo nl2br(CHtml::encode($calendarEntry->description)); ?><?php $this->endWidget(); ?>
 
