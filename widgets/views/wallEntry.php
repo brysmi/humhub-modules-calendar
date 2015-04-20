@@ -9,7 +9,6 @@
 
             <?php if ($calendarEntry->canRespond() && !$calendarEntry->hasResponded()): ?>
                 <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Attend"), $calendarEntry->createContainerUrlTemp('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED, 'id' => $calendarEntry->id)), array('class' => 'btn btn-success')); ?>
-                <!-- <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Maybe"), $calendarEntry->createContainerUrlTemp('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_MAYBE, 'id' => $calendarEntry->id)), array('class' => 'btn btn-default')); ?> -->
                 <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Decline"), $calendarEntry->createContainerUrlTemp('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED, 'id' => $calendarEntry->id)), array('class' => 'btn btn-default')); ?>
             <?php endif; ?>
 
@@ -17,7 +16,6 @@
                 <?php
                 $participationModes = array();
                 $participationModes[CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED] = Yii::t('CalendarModule.views_entry_view', "I´m attending");
-                // $participationModes[CalendarEntryParticipant::PARTICIPATION_STATE_MAYBE] = Yii::t('CalendarModule.views_entry_view', "I´m maybe attending");
                 $participationModes[CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED] = Yii::t('CalendarModule.views_entry_view', "I´m not attending");
                 ?>
 
