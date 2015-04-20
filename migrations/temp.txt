@@ -1,0 +1,2 @@
+ALTER TABLE `calendar_entry` ADD `location` VARCHAR(255) NULL DEFAULT NULL AFTER `recur_end`, ADD `geo` VARCHAR(255) NULL DEFAULT NULL AFTER `location`, ADD `source_uri` VARCHAR(255) NULL DEFAULT NULL AFTER `geo`;
+

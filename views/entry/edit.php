@@ -76,6 +76,22 @@ $form = $this->beginWidget('HActiveForm', array(
 
 
             <div class="form-group">
+                <?php echo $form->labelEx($calendarEntry, 'location'); ?>
+                <?php echo $form->textField($calendarEntry, 'location', array('class' => 'form-control', 'placeholder' => Yii::t('CalendarModule.views_entry_edit', 'Location'))); ?>
+            </div>
+
+            <div class="form-group">
+                <?php echo $form->labelEx($calendarEntry, 'geo'); ?>
+                <?php echo $form->textField($calendarEntry, 'geo', array('class' => 'form-control', 'placeholder' => Yii::t('CalendarModule.views_entry_edit', 'Geo Location'))); ?>
+            </div>
+
+            <div class="form-group">
+                <?php echo $form->labelEx($calendarEntry, 'source_uri'); ?>
+                <?php echo $form->textField($calendarEntry, 'source_uri', array('class' => 'form-control', 'placeholder' => Yii::t('CalendarModule.views_entry_edit', 'Source URI'))); ?>
+            </div>
+
+
+            <div class="form-group">
                 <?php
                 $modes = array(
                     CalendarEntry::PARTICIPATION_MODE_NONE => Yii::t('CalendarModule.views_entry_edit', 'No participants'),

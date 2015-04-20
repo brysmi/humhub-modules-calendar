@@ -15,6 +15,9 @@
  * @property integer $recur_type
  * @property integer $recur_interval
  * @property string $recur_end
+ * @property string $location
+ * @property string $geo
+ * @property string $source_uri
  */
 class CalendarEntry extends HActiveRecordContent
 {
@@ -32,7 +35,18 @@ class CalendarEntry extends HActiveRecordContent
     public $selected_participants = "";
 
     /**
-     * Default participiation Mode
+     * Location information
+     */
+    public $location = null;
+    public $geo = null;
+
+    /**
+     * Original event URI (ie ics, google calendar, Facebook event, etc)
+     */
+    public $source_uri = null;
+
+    /**
+     * Default participation Mode
      */
     public $participation_mode = 2;
 
@@ -85,6 +99,7 @@ class CalendarEntry extends HActiveRecordContent
     {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
+        // TODO: validate location and source uri (=> 255 length, can be null/empty, etc)
         return array(
             array('title, start_time, end_time, all_day', 'required'),
             array('start_time_date, end_time_date', 'required', 'on' => 'edit'),
@@ -128,6 +143,9 @@ class CalendarEntry extends HActiveRecordContent
             'recur_type' => Yii::t('CalendarModule.base', 'Recur Type'),
             'recur_interval' => Yii::t('CalendarModule.base', 'Recur Interval'),
             'recur_end' => Yii::t('CalendarModule.base', 'Recur End'),
+            'location' => Yii::t('CalendarModule.base', 'Location'),
+            'geo' => Yii::t('CalendarModule.base', 'GEO Location'),
+            'source_uri' => Yii::t('CalendarModule.base', 'Source URI'),
         );
     }
 
