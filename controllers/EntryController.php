@@ -206,8 +206,6 @@ class EntryController extends ContentContainerController
             $title = Yii::t('CalendarModule.base', 'Attending users');
         } elseif ($state == CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED) {
             $title = Yii::t('CalendarModule.base', 'Declining users');
-        // } elseif ($state == CalendarEntryParticipant::PARTICIPATION_STATE_MAYBE) {
-        //     $title = Yii::t('CalendarModule.base', 'Maybe attending users');
         }
 
         $this->renderPartial('application.modules_core.user.views._listUsers', array('title' => $title, 'users' => $users, 'pagination' => $pagination), false, true);

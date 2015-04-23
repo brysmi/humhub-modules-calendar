@@ -32,13 +32,11 @@ class CalendarEntryParticipantsWidget extends HWidget
     {
         // Count statitics of participants
         $countAttending = CalendarEntryParticipant::model()->countByAttributes(array('calendar_entry_id' => $this->calendarEntry->id, 'participation_state' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED));
-        // $countMaybe = CalendarEntryParticipant::model()->countByAttributes(array('calendar_entry_id' => $this->calendarEntry->id, 'participation_state' => CalendarEntryParticipant::PARTICIPATION_STATE_MAYBE));
         $countDeclined = CalendarEntryParticipant::model()->countByAttributes(array('calendar_entry_id' => $this->calendarEntry->id, 'participation_state' => CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED));
 
         $this->render('participants', array(
             'calendarEntry' => $this->calendarEntry,
             'countAttending' => $countAttending,
-            // 'countMaybe' => $countMaybe,
             'countDeclined' => $countDeclined,
         ));
     }
