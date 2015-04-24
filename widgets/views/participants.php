@@ -1,5 +1,6 @@
 <?php if ($calendarEntry->participation_mode != CalendarEntry::PARTICIPATION_MODE_NONE) : ?>
-    <?php echo Yii::t('CalendarModule.widgets_views_participants', 'Participants:'); ?><strong>
+    <?php echo Yii::t('CalendarModule.widgets_views_participants', 'Participants:'); ?>
+    <strong>
         <?php
         $title = Yii::t('CalendarModule.widgets_views_participants', ":count attending", array(':count' => $countAttending));
         if ($countAttending > 0) {
@@ -16,5 +17,8 @@
             echo $title;
         }
         ?>
-    </strong><br/>
+    </strong>
+    <br/>
+
+    <a class="attendees">+ ## more</a>
 <?php endif; ?>

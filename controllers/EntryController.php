@@ -43,6 +43,9 @@ class EntryController extends ContentContainerController
 
         $calendarEntryParticipant = CalendarEntryParticipant::model()->findByAttributes(array('user_id' => Yii::app()->user->id, 'calendar_entry_id' => $calendarEntry->id));
 
+//      NOTE: we have no interest in rendering space/user profile in the view/template
+        $this->subLayout = '';
+
         $this->render('view', array(
             'calendarEntry' => $calendarEntry,
             'calendarEntryParticipant' => $calendarEntryParticipant,

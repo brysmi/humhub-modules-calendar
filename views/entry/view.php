@@ -1,19 +1,36 @@
-<div class="panel panel-default">
+<div class="panel panel-default event">
     <div class="panel-body">
-        <h1>
-            Event: <?php echo CHtml::encode($calendarEntry->title); ?>
-
+        <h2 class="event-title">
+            <?php echo CHtml::encode($calendarEntry->title); ?>
+            <!--
             <?php if ($calendarEntry->is_public): ?>
                 <span class="label label-success"><?php echo Yii::t('CalendarModule.views_entry_view', 'Public'); ?></span>
             <?php endif; ?>
+            -->
+        </h2>
 
-        </h1>
+        <h3>Attending</h3>
 
-        <div class="pull-right">
+        <?php $this->widget('application.modules.calendar.widgets.CalendarEntryParticipantsWidget', array('calendarEntry'=>$calendarEntry)); ?>
 
+        <hr class=""/>
+
+        <p class="datetime"><i class="fa fa-calendar"></i> <?php $this->widget('application.modules.calendar.widgets.CalendarEntryDateWidget', array('calendarEntry'=>$calendarEntry)); ?></p>
+
+        <hr class=""/>
+
+        <p class="location"><i class="fa fa-map-marker"></i> <?php echo CHtml::encode($calendarEntry->location); ?></p>
+
+        <hr class=""/>
+
+        <?php $this->beginWidget('CMarkdown'); ?><?php echo nl2br(CHtml::encode($calendarEntry->description)); ?><?php $this->endWidget(); ?>
+
+        <hr class=""/>
+
+        <div class="">
             <?php if ($userCanRespond && !$userAlreadyResponded): ?>
-                <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Attend"), $this->createContainerUrl('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED, 'id' => $calendarEntry->id)), array('class' => 'btn btn-success')); ?>
-               <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Decline"), $this->createContainerUrl('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED, 'id' => $calendarEntry->id)), array('class' => 'btn btn-default')); ?>
+                <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Attend"), $this->createContainerUrl('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED, 'id' => $calendarEntry->id)), array('class' => 'btn btn-primary')); ?>
+                <?php echo CHtml::link(Yii::t('CalendarModule.views_entry_view', "Decline"), $this->createContainerUrl('/calendar/entry/respond', array('type' => CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED, 'id' => $calendarEntry->id)), array('class' => 'btn btn-primary')); ?>
             <?php endif; ?>
 
             <?php if ($userAlreadyResponded): ?>
@@ -24,8 +41,8 @@
                 ?>
 
                 <div class="btn-group">
-                    <button type="button" class="btn btn-success"><?php echo $participationModes[$calendarEntryParticipant->participation_state]; ?></button>
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                    <button type="button" class="btn btn-primary"><?php echo $participationModes[$calendarEntryParticipant->participation_state]; ?></button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
@@ -50,23 +67,12 @@
             <br />
         </div>
 
-        <?php $this->widget('application.modules.calendar.widgets.CalendarEntryDateWidget', array('calendarEntry'=>$calendarEntry)); ?>
-
-        <br /><br />
-
-        <?php echo Yii::t('CalendarModule.views_entry_view', 'Created by:'); ?> <strong><?php echo HHtml::link($calendarEntry->content->user->displayName, $calendarEntry->content->user->getUrl()); ?></strong>
-        <br />
-
-        <?php $this->widget('application.modules.calendar.widgets.CalendarEntryParticipantsWidget', array('calendarEntry'=>$calendarEntry)); ?>
-
-<!-- TODO: Location map view widget -->
-        <?php echo Yii::t('CalendarModule.views_entry_view', 'Location:'); ?> <strong><?php echo CHtml::encode($calendarEntry->location); ?></strong>
-        <br /><br />
-
-        <?php $this->beginWidget('CMarkdown'); ?><?php echo nl2br(CHtml::encode($calendarEntry->description)); ?><?php $this->endWidget(); ?>
 
 
-        <hr>
+<!--
+<?php //echo HHtml::link($calendarEntry->content->user->displayName, $calendarEntry->content->user->getUrl()); ?>
+-->
+
         <!-- <a href="#">Download ICal</a> &middot; -->
         <?php $this->widget('application.modules_core.like.widgets.LikeLinkWidget', array('object' => $calendarEntry)); ?> &middot;
         <?php $this->widget('application.modules_core.comment.widgets.CommentLinkWidget', array('object' => $calendarEntry)); ?>
