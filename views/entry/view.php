@@ -56,8 +56,6 @@
 
         <hr class=""/>
 
-       
-
         <p class="location"><i class="fa fa-map-marker"></i> <?php echo CHtml::encode($calendarEntry->location); ?></p>
 
         <hr class=""/>

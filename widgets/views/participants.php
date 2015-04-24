@@ -1,24 +1,31 @@
 <?php if ($calendarEntry->participation_mode != CalendarEntry::PARTICIPATION_MODE_NONE) : ?>
-    <?php echo Yii::t('CalendarModule.widgets_views_participants', 'Participants:'); ?>
-    <strong>
-        <?php
-        $title = Yii::t('CalendarModule.widgets_views_participants', ":count attending", array(':count' => $countAttending));
-        if ($countAttending > 0) {
-            echo HHtml::link($title, $calendarEntry->createContainerUrlTemp('/calendar/entry/userList', array('state' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED, 'id' => $calendarEntry->id)), array("class" => "tt", "title" => "", "data-toggle" => "modal", "data-target" => '#globalModal', "data-placement" => "top", "data-original-title" => ""));
-        } else {
-            echo $title;
-        }
-        echo " &middot; ";
 
-        $title = Yii::t('CalendarModule.widgets_views_participants', ":count declined", array(':count' => $countDeclined));
-        if ($countDeclined > 0) {
-            echo HHtml::link($title, $calendarEntry->createContainerUrlTemp('/calendar/entry/userList', array('state' => CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED, 'id' => $calendarEntry->id)), array("class" => "tt", "title" => "", "data-toggle" => "modal", "data-target" => '#globalModal', "data-placement" => "top", "data-original-title" => ""));
-        } else {
-            echo $title;
-        }
+    <?php foreach ($users as $user) : ?>
+        <?php
+        // Check for null user, if there are "zombies" in search index
+        if ($user == null)
+            continue;
         ?>
-    </strong>
+
+        <a href="<?php echo $user->getUrl(); ?>">
+            <img class="media-object img-square pull-left"
+                 src="<?php echo $user->getProfileImage()->getUrl(); ?>" width="75"
+                 height="75" alt="75x75" data-src="holder.js/75x75"
+                 style="width: 75px; height: 75px;">
+        </a>
+        
+    <?php endforeach; ?>
+
+    <br />
+
+    <?php
+    $title = Yii::t('CalendarModule.widgets_views_participants', "+ :count more", array(':count' => $countAttending-4));
+    if ($countAttending > 4) {
+        echo HHtml::link($title, $calendarEntry->createContainerUrlTemp('/calendar/entry/userList', array('state' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED, 'id' => $calendarEntry->id)), array("class" => "tt", "title" => "", "data-toggle" => "modal", "data-target" => '#globalModal', "data-placement" => "top", "data-original-title" => ""));
+    } else {
+//        echo $title;
+    }
+    ?>
     <br/>
 
-    <a class="attendees" style="display:none;">+ ## more</a>
 <?php endif; ?>

@@ -30,14 +30,27 @@ class CalendarEntryParticipantsWidget extends HWidget
 
     public function run()
     {
-        // Count statitics of participants
+        // Count statistics of participants
         $countAttending = CalendarEntryParticipant::model()->countByAttributes(array('calendar_entry_id' => $this->calendarEntry->id, 'participation_state' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED));
         $countDeclined = CalendarEntryParticipant::model()->countByAttributes(array('calendar_entry_id' => $this->calendarEntry->id, 'participation_state' => CalendarEntryParticipant::PARTICIPATION_STATE_DECLINED));
+
+        // TODO: get participants and *sort* by recommendation -- so integration with recommendation will be needed
+
+        $displayNumber = 4;
+        $criteria = new CDbCriteria();
+        $criteria->alias = "user";
+        $criteria->join = "LEFT JOIN calendar_entry_participant on user.id = calendar_entry_participant.user_id";
+        $criteria->condition = "calendar_entry_participant.calendar_entry_id = :entryId AND calendar_entry_participant.participation_state = :state";
+        $criteria->limit = $displayNumber;
+        $criteria->params = array(':entryId' => $this->calendarEntry->id, ':state' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED);
+
+        $users = User::model()->findAll($criteria);
 
         $this->render('participants', array(
             'calendarEntry' => $this->calendarEntry,
             'countAttending' => $countAttending,
             'countDeclined' => $countDeclined,
+            'users' => $users,
         ));
     }
 
