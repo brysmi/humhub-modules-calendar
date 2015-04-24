@@ -20,5 +20,5 @@
     </strong>
     <br/>
 
-    <a class="attendees">+ ## more</a>
+    <a class="attendees" style="display:none;">+ ## more</a>
 <?php endif; ?>
