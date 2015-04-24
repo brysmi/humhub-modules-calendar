@@ -17,8 +17,13 @@
     }
 
     .event-details{
-        margin-top: 64px;
+        margin-top: 20%;
     }
+
+    .event-details h2{
+        padding: 5px 0;
+    }
+
     </style>
     <div class="panel-body">
         <div class="map-holder">
