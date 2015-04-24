@@ -13,8 +13,7 @@
     <?php else: ?>
         <?php echo Yii::app()->dateFormatter->formatDateTime($calendarEntry->start_time, 'long', null); ?>
 
-        (<?php echo Yii::app()->dateFormatter->formatDateTime($calendarEntry->start_time, null, 'short'); ?>
-        - 
-        <?php echo Yii::app()->dateFormatter->formatDateTime($calendarEntry->end_time, null, 'short'); ?>)
+        <span style="font-size:24px; color: #B7A57A; margin: 0 5px; line-height: 22px;">&raquo;</span><?php echo Yii::app()->dateFormatter->formatDateTime($calendarEntry->start_time, null, 'short'); ?>
+        
     <?php endif; ?>
 <?php endif; ?>

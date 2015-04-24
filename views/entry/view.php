@@ -1,13 +1,48 @@
 <div class="panel panel-default event">
+    <style>
+    .map-holder{
+        margin-left:-15px; margin-right: -15px;
+    }
+
+    .event-title{
+      max-width: 76%;
+      margin-top: -50%;
+      margin-left: 122px;
+      font-size: 18px;
+      margin-bottom: 88px;
+    }
+    .datetime{ font-size: 16px;
+          margin-top: -80px;
+  margin-left: 122px;
+    }
+
+    .event-details{
+        margin-top: 64px;
+    }
+    </style>
     <div class="panel-body">
-        <h2 class="event-title">
+        <div class="map-holder">
+            <img src="/img/comotion_events_hero.png" style="width:100%;"/>
+        </div>
+        <h1 class="event-title">
             <?php echo CHtml::encode($calendarEntry->title); ?>
             <!--
             <?php if ($calendarEntry->is_public): ?>
                 <span class="label label-success"><?php echo Yii::t('CalendarModule.views_entry_view', 'Public'); ?></span>
             <?php endif; ?>
             -->
-        </h2>
+        </h1>
+
+         <h2 class="datetime">
+            <?php $this->widget('application.modules.calendar.widgets.CalendarEntryDateWidget', array('calendarEntry'=>$calendarEntry)); ?>
+         </h2>
+
+        <div class="event-details">
+            <h2>About</h2>
+            <?php $this->beginWidget('CMarkdown'); ?><?php echo nl2br(CHtml::encode($calendarEntry->description)); ?><?php $this->endWidget(); ?>
+        </div>
+
+        <hr class=""/>
 
         <h3>Attending</h3>
 
@@ -15,17 +50,13 @@
 
         <hr class=""/>
 
-        <p class="datetime"><i class="fa fa-calendar"></i> <?php $this->widget('application.modules.calendar.widgets.CalendarEntryDateWidget', array('calendarEntry'=>$calendarEntry)); ?></p>
-
-        <hr class=""/>
+       
 
         <p class="location"><i class="fa fa-map-marker"></i> <?php echo CHtml::encode($calendarEntry->location); ?></p>
 
         <hr class=""/>
 
-        <?php $this->beginWidget('CMarkdown'); ?><?php echo nl2br(CHtml::encode($calendarEntry->description)); ?><?php $this->endWidget(); ?>
-
-        <hr class=""/>
+        
 
         <div class="">
             <?php if ($userCanRespond && !$userAlreadyResponded): ?>
