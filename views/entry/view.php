@@ -10,6 +10,7 @@
       margin-left: 122px;
       font-size: 18px;
       margin-bottom: 88px;
+      font-weight: bold;
     }
     .datetime{ font-size: 16px;
           margin-top: -80px;
